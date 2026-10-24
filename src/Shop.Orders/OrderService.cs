@@ -2,7 +2,12 @@ namespace Shop.Orders;
 
 public sealed class OrderService
 {
-    private readonly DemoPaymentGateway gateway = new();
+    private readonly IPaymentGateway gateway;
+
+    public OrderService(IPaymentGateway gateway)
+    {
+        this.gateway = gateway ?? throw new ArgumentNullException(nameof(gateway));
+    }
 
     public bool Checkout(IEnumerable<OrderItem> items, CustomerKind customer)
     {

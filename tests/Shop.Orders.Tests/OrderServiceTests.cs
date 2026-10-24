@@ -7,7 +7,7 @@ public class OrderServiceTests
     [Test]
     public void ValidRegularOrder_IsPaid()
     {
-        var service = new OrderService();
+        var service = new OrderService(new DemoPaymentGateway());
         var items = new[] { new OrderItem(100m, 2) };
 
         bool result = service.Checkout(items, CustomerKind.Regular);
